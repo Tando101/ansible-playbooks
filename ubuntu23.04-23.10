@@ -1,0 +1,26 @@
+---
+- name: Upgrade Ubuntu from 23.04 to 23.10
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update package lists
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: yes
+        autoremove: yes
+
+    - name: Change release name in sources.list
+      replace:
+        path: /etc/apt/sources.list
+        regexp: '23.04'
+        replace: '23.10'
+
+    - name: Perform distribution upgrade
+      apt:
+        upgrade: dist
+        autoremove: yes
+        force_apt_get: yes

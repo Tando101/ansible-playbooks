@@ -1,0 +1,16 @@
+   - name: Find files you want to move
+       ansible.builtin.find:
+       paths: /home/tando/test/
+       file_type: .sh
+       excludes: "*.txt" # Whatever pattern you want to exclude
+       register: files_output
+
+-name:
+-hosts: tankiso
+ user: tankiso
+ tasks:
+    - name: Copy the files
+      ansible.builtin.copy:
+        src: "{{ item.path }}"
+        dest: /bin
+      loop: "{{ files_output.files }}"

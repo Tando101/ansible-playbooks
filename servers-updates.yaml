@@ -1,0 +1,25 @@
+---
+- name: Check Ubuntu servers for updates and OS versions
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Update APT package cache
+      become: yes
+      apt:
+        update_cache: yes
+
+    - name: Check available updates
+      become: yes
+      apt:
+        upgrade: safe
+        list: yes
+      register: apt_update
+
+    - name: Display available updates
+      debug:
+        var: apt_update
+
+    - name: Display OS version
+      debug:
+        var: ansible_distribution_versi

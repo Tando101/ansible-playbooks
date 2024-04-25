@@ -1,0 +1,9 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Upgrade Ubuntu w do release upgrade
+      expect:
+      command: do-release-upgrade
+      responses:
+         'First Question in the prompt' : 'y'
+         'Second Question in the prompt' : 'y'
