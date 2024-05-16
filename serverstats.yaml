@@ -1,0 +1,38 @@
+
+---
+- name: System Monitoring Playbook
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Check Uptime
+      command: uptime
+      register: uptime_output
+
+    - name: Display Uptime
+      debug:
+        msg: "{{ uptime_output.stdout_lines }}"
+
+    - name: Check RAM Usage
+      command: free -m
+      register: ram_output
+
+    - name: Display RAM Usage
+      debug:
+        msg: "{{ ram_output.stdout_lines }}"
+
+    - name: Check Storage Usage
+      command: df -h
+      register: storage_output
+
+    - name: Display Storage Usage
+      debug:
+        msg: "{{ storage_output.stdout_lines }}"
+
+    - name: Check CPU Usage
+      shell: "top -bn1 | grep 'Cpu(s)'"
+      register: cpu_output
+
+    - name: Display CPU Usage
+      debug:
+        msg: "{{ cpu_output.stdout_lines }}"
