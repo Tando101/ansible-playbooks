@@ -1,7 +1,6 @@
 ---
 - name: Upgrade Node.js to the latest version on Ubuntu
   hosts: all
-  become: yes
   tasks:
     - name: Add NodeSource APT repository for Node.js
       apt_repository:
