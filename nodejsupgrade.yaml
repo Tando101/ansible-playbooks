@@ -1,0 +1,23 @@
+---
+- name: Upgrade Node.js to the latest version on Ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add NodeSource APT repository for Node.js
+      apt_repository:
+        repo: 'deb https://deb.nodesource.com/node_18.x {{ ansible_distribution_release }} main'
+        state: present
+        update_cache: yes
+
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: latest
+
+    - name: Check Node.js version
+      command: node -v
+      register: node_version
+
+    - name: Display Node.js version
+      debug:
+        msg: "Node.js version is {{ node_version.stdout }}"
