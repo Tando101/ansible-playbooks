@@ -37,12 +37,4 @@
       debug:
         msg: "{{ cpu_output.stdout_lines }}"
 
-    - name: Send email
-      mail: 
-        host: 10.253.52.225
-        port: 25
-        from: strategix_monitor@goldmedialab.com
-        to: tando@goldmedialab.com   
-        subject: "{{System Monitoring Playbook}} has completed."
-        body: ""
-        
+   
