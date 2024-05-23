@@ -2,7 +2,7 @@
 - name: Upgrade OpenSSH on Ubuntu Desktop
   hosts: all
   become: yes
-
+  become_user: tando
   tasks:
     - name: Update apt package list
       apt:
