@@ -1,0 +1,20 @@
+---
+- name: Upgrade OpenSSH on Ubuntu Desktop
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt package list
+      apt:
+        update_cache: yes
+
+    - name: Upgrade OpenSSH server
+      apt:
+        name: openssh-server
+        state: latest
+
+    - name: Ensure OpenSSH server is running
+      service:
+        name: ssh
+        state: started
+        enabled: yes
